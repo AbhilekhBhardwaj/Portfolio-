@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
 import { projects, type Project } from "./projectsData";
 import "./ProjectsSection.css";
 
@@ -14,6 +15,21 @@ function chunkPairs<T>(items: T[]): T[][] {
 
 export function Projects() {
   const rows = chunkPairs(projects);
+  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
+
+  const handleMouseEnter = (projectName: string) => {
+    const video = videoRefs.current[projectName];
+    if (!video) return;
+    video.currentTime = 0;
+    void video.play();
+  };
+
+  const handleMouseLeave = (projectName: string) => {
+    const video = videoRefs.current[projectName];
+    if (!video) return;
+    video.pause();
+    video.currentTime = 0;
+  };
 
   return (
     <section
@@ -61,11 +77,28 @@ export function Projects() {
             <div className="projects-grid__row" key={rowIndex}>
               {pair.map((project: Project) => (
                 <article className="project-card" key={project.name}>
-                  <Link href={project.href} className="project-card__link">
+                  <Link
+                    href={project.href}
+                    className="project-card__link"
+                    onMouseEnter={() => handleMouseEnter(project.name)}
+                    onMouseLeave={() => handleMouseLeave(project.name)}
+                  >
                     <div className="project-card__media">
                       <div className="project-card__label">
                         <h3>{project.name}</h3>
                       </div>
+                      <video
+                        ref={(el) => {
+                          videoRefs.current[project.name] = el;
+                        }}
+                        className="project-card__video"
+                        src={project.video}
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-hidden
+                      />
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={project.img} alt={project.name} />
                     </div>

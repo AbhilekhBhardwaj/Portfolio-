@@ -2,32 +2,37 @@ export type Project = {
   name: string;
   description: string;
   img: string;
+  video: string;
   href: string;
 };
 
 export const projects: Project[] = [
   {
-    name: "Citychild",
+    name: "Physics Kills",
     description: "A quiet rebellion drawn in digital ink.",
-    img: "/featured-work/work-1.jpg",
-    href: "/sample-project",
+    img: "/images/work-items/work-item-2.png",
+    video: "/featured-work/phkills.mp4",
+    href: "https://physics-kills.vercel.app/",
   },
   {
-    name: "Chrome Saint",
+    name: "Terabyte",
     description: "A reflective figure sculpted in synthetic light.",
-    img: "/featured-work/work-2.jpg",
-    href: "/sample-project",
+    img: "/images/work-items/work-item-1.png",
+    video: "/featured-work/terabyte.mp4",
+    href: "https://terabyte-l43d.vercel.app/",
   },
   {
-    name: "Gunmetal Dream",
+    name: "Nexabot",
     description: "Tension, style, and a hint of cinematic noir.",
-    img: "/featured-work/work-3.jpg",
+    img: "/images/work-items/work-item-4.png",
+    video: "/featured-work/nexabot.mp4",
     href: "/sample-project",
   },
   {
-    name: "Stoneface",
+    name: "Synthex",
     description: "Fragments of memory cast in mineral form.",
-    img: "/featured-work/work-4.jpg",
+    img: "/images/work-items/work-item-3.png",
+    video: "/featured-work/synthex.mp4",
     href: "/sample-project",
   },
 ];
