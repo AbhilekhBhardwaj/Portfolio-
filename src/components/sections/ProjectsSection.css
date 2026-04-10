@@ -1,15 +1,16 @@
 /* Optional: only if your app doesn’t already set these */
 .projects-section {
-  --base-100: #e3e3db;
-  --base-400: #1a1614;
+  --projects-bg: #111318;
+  --projects-fg: #e7e9ee;
 }
 
 .projects-section {
   position: relative;
   width: 100%;
   padding: 8rem 0 6rem;
-  background-color: var(--base-100, #e3e3db);
+  background: radial-gradient(circle at 20% 10%, #1a1f2a 0%, var(--projects-bg, #111318) 45%);
   overflow: hidden;
+  color: var(--projects-fg, #e7e9ee);
 }
 
 .projects-section .container {
@@ -33,7 +34,7 @@
 }
 
 .projects-section .featured-title {
-  font-family: "rader", system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-style: italic;
   text-transform: uppercase;
   line-height: 0.95;
@@ -44,7 +45,7 @@
 
 .projects-section .projects-section__arrow {
   width: 3rem;
-  color: var(--base-400, #1a1614);
+  color: var(--projects-fg, #e7e9ee);
 }
 
 .projects-section .projects-section__intro {
@@ -127,15 +128,20 @@
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background-color: var(--base-400, #1a1614);
-  padding: 0.5rem 0.5rem 0.35rem;
-  border-radius: 0.5rem;
+  background: rgba(9, 12, 18, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(231, 233, 238, 0.28);
+  padding: 0.5rem 0.7rem 0.45rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.38);
 }
 
 .projects-section .project-card__label h3 {
   font-size: 1.5rem;
   letter-spacing: -0.01rem;
-  color: var(--base-100, #e3e3db);
+  color: rgba(236, 239, 246, 0.95);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
   margin: 0;
 }
 

@@ -14,9 +14,9 @@ export function Contact() {
       </div>
 
       <div className="contact-section__grid">
-        <a className="contact-card" href="mailto:youremail@example.com">
+        <a className="contact-card" href="mailto:bhardwaj.abhilekh@gmail.com">
           <p className="contact-card__label">Email</p>
-          <p className="contact-card__value">youremail@example.com</p>
+          <p className="contact-card__value">bhardwaj.abhilekh@gmail.com</p>
         </a>
         <a
           className="contact-card"
@@ -27,9 +27,9 @@ export function Contact() {
           <p className="contact-card__label">LinkedIn</p>
           <p className="contact-card__value">linkedin.com/in/yourprofile</p>
         </a>
-        <a className="contact-card" href="https://github.com/yourusername" target="_blank" rel="noreferrer">
+        <a className="contact-card" href="https://github.com/AbhilekhBhardwaj" target="_blank" rel="noreferrer">
           <p className="contact-card__label">GitHub</p>
-          <p className="contact-card__value">github.com/yourusername</p>
+          <p className="contact-card__value">github.com/AbhilekhBhardwaj</p>
         </a>
       </div>
     </section>

@@ -13,12 +13,13 @@
 
 .logo {
   padding: 0.5em 0.65em;
-  background-color: var(--fg);
+  background-color: #151b25;
+  border: 1px solid rgba(231, 233, 238, 0.18);
   border-radius: 0.4em;
 }
 
 .logo a {
-  color: var(--bg);
+  color: #e7e9ee;
   user-select: none;
   text-decoration: none;
 }
@@ -31,16 +32,16 @@
 
 .navLink {
   text-decoration: none;
-  color: var(--fg);
-  background-color: color-mix(in srgb, var(--bg) 90%, white 10%);
-  border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
+  color: #e7e9ee;
+  background-color: #151b25;
+  border: 1px solid rgba(231, 233, 238, 0.18);
   padding: 0.55em 0.75em 0.5em;
   border-radius: 0.4em;
 }
 
 .navLink:hover {
-  background-color: var(--fg);
-  color: var(--bg);
+  background-color: #202939;
+  color: #ffffff;
 }
 
 .mn {

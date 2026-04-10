@@ -14,18 +14,11 @@
   /* wrapper for two lines; original had no class — keeps layout clear */
 }
 
-.hero h1 {
-  text-transform: uppercase;
-  font-family: "rader", system-ui, sans-serif;
-  font-style: italic;
-  line-height: 0.95;
-}
-
 .heroHeader h1 {
   font-size: 11vw;
   line-height: 0.9;
-  color: #141414;
-  font-family: "rader", system-ui, sans-serif;
+  color: #d9dde6;
+  font-family: var(--font-heading);
   font-style: italic;
   font-weight: 500;
 }
@@ -90,19 +83,10 @@
   overflow: hidden;
 }
 
-.heroImg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.22);
-  pointer-events: none;
-}
-
 .heroImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(1.05) contrast(1.05);
 }
 
 @media (max-width: 1000px) {

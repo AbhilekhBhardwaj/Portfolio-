@@ -1,11 +1,12 @@
 .contact-section {
-  --base-100: #e3e3db;
-  --base-400: #1a1614;
+  --contact-bg: #0f131b;
+  --contact-fg: #e7e9ee;
+  --contact-card-bg: #1a2230;
   position: relative;
   width: 100%;
   padding: 8rem 2rem;
-  background-color: var(--base-100, #e3e3db);
-  color: var(--base-400, #1a1614);
+  background: linear-gradient(180deg, #11151d 0%, var(--contact-bg, #0f131b) 100%);
+  color: var(--contact-fg, #e7e9ee);
 }
 
 .contact-section__header {
@@ -39,8 +40,8 @@
 }
 
 .contact-card {
-  background: var(--base-400, #1a1614);
-  color: var(--base-100, #e3e3db);
+  background: var(--contact-card-bg, #1a2230);
+  color: var(--contact-fg, #e7e9ee);
   text-decoration: none;
   border-radius: 1rem;
   padding: 1.25rem;
@@ -48,12 +49,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 180ms ease, opacity 180ms ease;
+  border: 1px solid rgba(231, 233, 238, 0.14);
+  transition: transform 180ms ease, opacity 180ms ease, border-color 180ms ease;
 }
 
 .contact-card:hover {
   transform: translateY(-4px);
   opacity: 0.96;
+  border-color: rgba(231, 233, 238, 0.28);
 }
 
 .contact-card__label {

@@ -136,9 +136,9 @@ export function Footer() {
           </div>
           <div className={styles.footerCol}>
             <p>Profiles</p>
-            <p><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a></p>
+            <p><a href="https://github.com/AbhilekhBhardwaj" target="_blank" rel="noreferrer">GitHub</a></p>
             <p><a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">LinkedIn</a></p>
-            <p><a href="mailto:youremail@example.com">Email</a></p>
+            <p><a href="mailto:bhardwaj.abhilekh@gmail.com">Email</a></p>
           </div>
           <div className={styles.footerCol}>
             <p>Availability</p>

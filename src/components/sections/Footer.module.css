@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 80svh;
-  color: var(--bg);
+  color: #e7e9ee;
   padding: 2em;
   display: flex;
   align-items: stretch;
@@ -13,7 +13,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--fg);
+  background-color: #0f141d;
   padding: 2em;
   border-radius: 2em;
   display: flex;
@@ -48,7 +48,7 @@
 }
 
 .footerCol a {
-  color: var(--bg);
+  color: #e7e9ee;
   text-decoration: none;
   opacity: 0.75;
 }
