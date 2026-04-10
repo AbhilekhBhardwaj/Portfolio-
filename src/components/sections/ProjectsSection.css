@@ -32,6 +32,16 @@
   width: 50%;
 }
 
+.projects-section .featured-title {
+  font-family: "rader", system-ui, sans-serif;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: 5rem;
+  text-align: center;
+  transform: translateY(-0.5em);
+}
+
 .projects-section .projects-section__arrow {
   width: 3rem;
   color: var(--base-400, #1a1614);
@@ -123,5 +133,9 @@
   .projects-section .projects-grid__row {
     width: 100%;
     flex-direction: column;
+  }
+
+  .projects-section .featured-title {
+    font-size: 18vw;
   }
 }

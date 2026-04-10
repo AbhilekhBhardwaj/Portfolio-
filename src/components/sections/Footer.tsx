@@ -114,7 +114,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className={styles.footer}>
+    <footer id="footer" ref={footerRef} className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={`${styles.footerSymbols} ${styles.footerSymbolsTop}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

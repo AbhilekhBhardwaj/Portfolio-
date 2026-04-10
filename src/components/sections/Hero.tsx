@@ -7,6 +7,13 @@ import styles from "./Hero.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const heroCycleImages = [
+  "/images/work-items/work-item-1.png",
+  "/images/work-items/work-item-2.png",
+  "/images/work-items/work-item-3.png",
+  "/images/work-items/work-item-4.png",
+];
+
 export function Hero() {
   const imgRef = useRef<HTMLImageElement>(null);
   const holderRef = useRef<HTMLElement>(null);
@@ -18,13 +25,12 @@ export function Hero() {
     const imgWrap = imgWrapRef.current;
     if (!heroImg || !holder || !imgWrap) return;
 
-    let currentImageIndex = 1;
-    const totalImages = 10;
+    let currentImageIndex = 0;
 
     const intervalId = setInterval(() => {
       currentImageIndex =
-        currentImageIndex >= totalImages ? 1 : currentImageIndex + 1;
-      heroImg.src = `/images/work-items/work-item-${currentImageIndex}.jpg`;
+        currentImageIndex >= heroCycleImages.length - 1 ? 0 : currentImageIndex + 1;
+      heroImg.src = heroCycleImages[currentImageIndex];
     }, 250);
 
     let scrollTriggerInstance: ScrollTrigger | null = null;
@@ -78,11 +84,8 @@ export function Hero() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/global/symbols.png" alt="" />
           </div>
-          <div className={styles.heroFooterScrollDown}>
-            <p className={styles.mn}>Pixels by Abhilekh / 2026</p>
-          </div>
           <div className={styles.heroFooterTags}>
-            <p className={styles.mn}>Portfolio Mode: ON</p>
+            <p className={styles.mn}>Building Mode: ON</p>
           </div>
         </div>
       </section>
@@ -90,7 +93,7 @@ export function Hero() {
       <section ref={holderRef} className={styles.heroImgHolder}>
         <div ref={imgWrapRef} className={styles.heroImg}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img ref={imgRef} src="/images/hero/img1.jpg" alt="" />
+          <img ref={imgRef} src={heroCycleImages[0]} alt="" />
         </div>
       </section>
     </div>

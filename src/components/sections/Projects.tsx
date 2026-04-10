@@ -27,7 +27,7 @@ export function Projects() {
       <div className="container">
         <div className="projects-section__header">
           <div className="projects-section__title">
-            <h1>Featured Work</h1>
+            <h1 className="featured-title">Featured Work</h1>
           </div>
 
           <div className="projects-section__arrow" aria-hidden>
@@ -54,12 +54,6 @@ export function Projects() {
             </svg>
           </div>
 
-          <div className="projects-section__intro">
-            <p>
-              From motion to concept, pieces born from quiet sketches, late
-              nights, and just the right amount of chaos.
-            </p>
-          </div>
         </div>
 
         <div className="projects-grid">

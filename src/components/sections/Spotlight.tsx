@@ -89,7 +89,7 @@ export function Spotlight() {
   );
 
   return (
-    <section className="spotlight" ref={spotlightRef}>
+    <section id="spotlight" className="spotlight scroll-mt-20" ref={spotlightRef}>
       <div className="marquees">
         <div className="marquee-container" id="marquee-1">
           <div className="marquee">

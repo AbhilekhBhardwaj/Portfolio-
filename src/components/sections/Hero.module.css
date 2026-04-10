@@ -24,6 +24,10 @@
 .heroHeader h1 {
   font-size: 11vw;
   line-height: 0.9;
+  color: #fff;
+  font-family: "rader", system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .heroHeader1 {
@@ -55,6 +59,10 @@
 
 .heroFooterSymbols {
   height: 1rem;
+}
+
+.heroFooterTags {
+  margin-left: auto;
 }
 
 .mn {
