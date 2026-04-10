@@ -30,16 +30,4 @@ export const projects: Project[] = [
     img: "/featured-work/work-4.jpg",
     href: "/sample-project",
   },
-  {
-    name: "Amber Cloak",
-    description: "A still frame between warmth and defiance.",
-    img: "/featured-work/work-5.jpg",
-    href: "/sample-project",
-  },
-  {
-    name: "Paper Blade",
-    description: "A delicate strike between art and motion.",
-    img: "/featured-work/work-6.jpg",
-    href: "/sample-project",
-  },
 ];

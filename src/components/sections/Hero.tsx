@@ -40,7 +40,7 @@ export function Hero() {
           gsap.set(imgWrap, {
             y: `${-110 + 110 * progress}%`,
             scale: 0.25 + 0.75 * progress,
-            rotation: -15 + 15 * progress,
+            rotation: 0,
           });
         },
       });
