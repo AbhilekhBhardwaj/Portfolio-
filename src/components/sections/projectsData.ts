@@ -21,18 +21,4 @@ export const projects: Project[] = [
     video: "/featured-work/terabyte.mp4",
     href: "https://terabyte-l43d.vercel.app/",
   },
-  {
-    name: "Nexabot",
-    description: "Tension, style, and a hint of cinematic noir.",
-    img: "/images/work-items/work-item-4.png",
-    video: "/featured-work/nexabot.mp4",
-    href: "/sample-project",
-  },
-  {
-    name: "Synthex",
-    description: "Fragments of memory cast in mineral form.",
-    img: "/images/work-items/work-item-3.png",
-    video: "/featured-work/synthex.mp4",
-    href: "/sample-project",
-  },
 ];

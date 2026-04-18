@@ -96,12 +96,14 @@
   aspect-ratio: 4 / 3;
   border-radius: 1rem;
   overflow: hidden;
+  background: #0b0f16;
 }
 
 .projects-section .project-card__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: opacity 200ms ease;
 }
 
@@ -110,7 +112,8 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   opacity: 0;
   transition: opacity 200ms ease;
   pointer-events: none;

@@ -1,4 +1,4 @@
-import { Contact, Footer, Hero, Projects, Spotlight } from "@/components/sections";
+import { Footer, Hero, Projects, Spotlight } from "@/components/sections";
 import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
@@ -9,7 +9,6 @@ export default function Home() {
         <Hero />
         <Projects />
         <Spotlight />
-        <Contact />
         <Footer />
       </main>
     </div>
