@@ -37,17 +37,23 @@ export function Footer() {
               </a>
             </p>
             <p>
-              <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.linkedin.com/in/abhilekh-bhardwaj-58a7a41b7/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 LinkedIn
               </a>
             </p>
             <p>
-              <a href="mailto:bhardwaj.abhilekh@gmail.com">Email</a>
+              <a href="https://x.com/AbhilekhBh28" target="_blank" rel="noreferrer">
+                Twitter (X)
+              </a>
             </p>
           </div>
           <div className={styles.footerCol}>
             <p>Availability</p>
-            <p>Open to full-stack roles</p>
+            <p>bhardwaj.abhilekh@gmail.com</p>
             <p>Freelance: Available</p>
             <p>Remote / Hybrid</p>
           </div>

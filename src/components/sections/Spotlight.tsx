@@ -18,10 +18,14 @@ type SpotlightItem = {
 const spotlightItems: SpotlightItem[] = [
   {
     video: "/spotlight/spotlight-1.mp4",
-    href: "file:///C:/Users/HP/Downloads/Hero%20Section.html",
+    href: "https://prompt-hero-section.vercel.app/",
     alt: "Spotlight item 1",
   },
-  { video: "/spotlight/spotlight-2.mp4", alt: "Spotlight item 2" },
+  {
+    video: "/spotlight/spotlight-2.mp4",
+    href: "https://airline-hero-section.vercel.app/",
+    alt: "Spotlight item 2",
+  },
   {
     video: "/spotlight/spotlight-3.mp4",
     href: "https://image-hover-blush.vercel.app/",
@@ -42,14 +46,13 @@ const spotlightItems: SpotlightItem[] = [
     href: "https://scroll-animation-hero-section.vercel.app/",
     alt: "Spotlight item 6",
   },
-  { video: "/spotlight/spotlight-7.mp4", alt: "Spotlight item 7" },
 ];
 
 const marqueeRows = [
-  { id: "marquee-1", text: "Hyperreal", textIndex: 1 },
-  { id: "marquee-2", text: "Fragmented", textIndex: 3 },
-  { id: "marquee-3", text: "Softcore", textIndex: 1 },
-  { id: "marquee-4", text: "Motion", textIndex: 3 },
+  { id: "marquee-1", text: "Click", textIndex: 1 },
+  { id: "marquee-2", text: "on video", textIndex: 3 },
+  { id: "marquee-3", text: "to", textIndex: 1 },
+  { id: "marquee-4", text: "view", textIndex: 3 },
 ];
 
 function createSeededRandom(seed: number): () => number {
@@ -61,8 +64,24 @@ function createSeededRandom(seed: number): () => number {
   };
 }
 
-function getRowSpotlightItems(rowIndex: number, count: number): SpotlightItem[] {
-  const random = createSeededRandom((rowIndex + 1) * 97);
+function getSpotlightItemByVideo(video: string): SpotlightItem {
+  return spotlightItems.find((item) => item.video === video) ?? { video, alt: "Spotlight item" };
+}
+
+function applyRowVideoSwap(rowIndex: number, video: string): SpotlightItem {
+  if (rowIndex === 0 && video === "/spotlight/spotlight-4.mp4") {
+    return getSpotlightItemByVideo("/spotlight/spotlight-5.mp4");
+  }
+
+  if (rowIndex === 1 && video === "/spotlight/spotlight-5.mp4") {
+    return getSpotlightItemByVideo("/spotlight/spotlight-4.mp4");
+  }
+
+  return getSpotlightItemByVideo(video);
+}
+
+function getRowsSpotlightItems(rowCount: number, countPerRow: number): SpotlightItem[][] {
+  const random = createSeededRandom(97);
   const shuffled = [...spotlightItems];
 
   for (let i = shuffled.length - 1; i > 0; i -= 1) {
@@ -70,27 +89,58 @@ function getRowSpotlightItems(rowIndex: number, count: number): SpotlightItem[] 
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
 
-  return shuffled.slice(0, Math.min(count, shuffled.length));
-}
+  const totalSlots = rowCount * countPerRow;
+  const flatItems: SpotlightItem[] = [];
 
-function getSpotlightItemByVideo(video: string): SpotlightItem {
-  return spotlightItems.find((item) => item.video === video) ?? { video, alt: "Spotlight item" };
-}
+  for (let i = 0; i < totalSlots; i += 1) {
+    let baseItem = shuffled[i % shuffled.length];
+    let chosen = getSpotlightItemByVideo(baseItem.video);
 
-function applyRowVideoSwap(rowIndex: number, item: SpotlightItem): SpotlightItem {
-  if (rowIndex === 0 && item.video === "/spotlight/spotlight-4.mp4") {
-    return getSpotlightItemByVideo("/spotlight/spotlight-5.mp4");
+    if (flatItems.length > 0 && chosen.video === flatItems[flatItems.length - 1].video) {
+      for (let offset = 1; offset < shuffled.length; offset += 1) {
+        baseItem = shuffled[(i + offset) % shuffled.length];
+        const candidate = getSpotlightItemByVideo(baseItem.video);
+        if (candidate.video !== flatItems[flatItems.length - 1].video) {
+          chosen = candidate;
+          break;
+        }
+      }
+    }
+
+    flatItems.push(chosen);
   }
 
-  if (rowIndex === 1 && item.video === "/spotlight/spotlight-5.mp4") {
-    return getSpotlightItemByVideo("/spotlight/spotlight-4.mp4");
+  const rows: SpotlightItem[][] = [];
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    const start = rowIndex * countPerRow;
+    const rowItems = flatItems
+      .slice(start, start + countPerRow)
+      .map((item) => applyRowVideoSwap(rowIndex, item.video));
+
+    for (let i = 1; i < rowItems.length; i += 1) {
+      if (rowItems[i].video === rowItems[i - 1].video) {
+        for (let offset = 1; offset < shuffled.length; offset += 1) {
+          const candidate = applyRowVideoSwap(
+            rowIndex,
+            shuffled[(start + i + offset) % shuffled.length].video
+          );
+          if (candidate.video !== rowItems[i - 1].video) {
+            rowItems[i] = candidate;
+            break;
+          }
+        }
+      }
+    }
+
+    rows.push(rowItems);
   }
 
-  return item;
+  return rows;
 }
 
 export function Spotlight() {
   const spotlightRef = useRef<HTMLElement | null>(null);
+  const rowsSpotlightItems = getRowsSpotlightItems(marqueeRows.length, 4);
 
   useGSAP(
     () => {
@@ -172,7 +222,7 @@ export function Spotlight() {
     <section id="spotlight" className="spotlight scroll-mt-20" ref={spotlightRef}>
       <div className="marquees">
         {marqueeRows.map((row, rowIndex) => {
-          const rowItems = getRowSpotlightItems(rowIndex, 4);
+          const rowItems = rowsSpotlightItems[rowIndex];
           let imageSlotIndex = 0;
 
           return (
@@ -187,10 +237,7 @@ export function Spotlight() {
                     );
                   }
 
-                  const item = applyRowVideoSwap(
-                    rowIndex,
-                    rowItems[imageSlotIndex % rowItems.length]
-                  );
+                  const item = rowItems[imageSlotIndex % rowItems.length];
                   imageSlotIndex += 1;
 
                   if (!item.href) {
