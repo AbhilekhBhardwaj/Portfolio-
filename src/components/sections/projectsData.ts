@@ -10,7 +10,7 @@ export const projects: Project[] = [
   {
     name: "Physics Kills",
     description: "A quiet rebellion drawn in digital ink.",
-    img: "/images/work-items/work-item-2.png",
+    img: "/images/work-items/work-item-3.png",
     video: "/featured-work/phkills.mp4",
     href: "https://physics-kills.vercel.app/",
   },

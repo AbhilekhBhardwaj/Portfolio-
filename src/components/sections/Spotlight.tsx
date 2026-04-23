@@ -16,12 +16,32 @@ type SpotlightItem = {
 };
 
 const spotlightItems: SpotlightItem[] = [
-  { video: "/spotlight/spotlight-1.mp4", alt: "Spotlight item 1" },
+  {
+    video: "/spotlight/spotlight-1.mp4",
+    href: "file:///C:/Users/HP/Downloads/Hero%20Section.html",
+    alt: "Spotlight item 1",
+  },
   { video: "/spotlight/spotlight-2.mp4", alt: "Spotlight item 2" },
-  { video: "/spotlight/spotlight-3.mp4", alt: "Spotlight item 3" },
-  { video: "/spotlight/spotlight-4.mp4", alt: "Spotlight item 4" },
-  { video: "/spotlight/spotlight-5.mp4", alt: "Spotlight item 5" },
-  { video: "/spotlight/spotlight-6.mp4", alt: "Spotlight item 6" },
+  {
+    video: "/spotlight/spotlight-3.mp4",
+    href: "https://image-hover-blush.vercel.app/",
+    alt: "Spotlight item 3",
+  },
+  {
+    video: "/spotlight/spotlight-4.mp4",
+    href: "https://hero-section-reveal.vercel.app/",
+    alt: "Spotlight item 4",
+  },
+  {
+    video: "/spotlight/spotlight-5.mp4",
+    href: "https://securify-93q9.vercel.app/",
+    alt: "Spotlight item 5",
+  },
+  {
+    video: "/spotlight/spotlight-6.mp4",
+    href: "https://scroll-animation-hero-section.vercel.app/",
+    alt: "Spotlight item 6",
+  },
   { video: "/spotlight/spotlight-7.mp4", alt: "Spotlight item 7" },
 ];
 
@@ -53,13 +73,17 @@ function getRowSpotlightItems(rowIndex: number, count: number): SpotlightItem[] 
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
+function getSpotlightItemByVideo(video: string): SpotlightItem {
+  return spotlightItems.find((item) => item.video === video) ?? { video, alt: "Spotlight item" };
+}
+
 function applyRowVideoSwap(rowIndex: number, item: SpotlightItem): SpotlightItem {
   if (rowIndex === 0 && item.video === "/spotlight/spotlight-4.mp4") {
-    return { ...item, video: "/spotlight/spotlight-5.mp4", alt: "Spotlight item 5" };
+    return getSpotlightItemByVideo("/spotlight/spotlight-5.mp4");
   }
 
   if (rowIndex === 1 && item.video === "/spotlight/spotlight-5.mp4") {
-    return { ...item, video: "/spotlight/spotlight-4.mp4", alt: "Spotlight item 4" };
+    return getSpotlightItemByVideo("/spotlight/spotlight-4.mp4");
   }
 
   return item;
@@ -183,6 +207,9 @@ export function Spotlight() {
                           autoPlay
                           playsInline
                           preload="metadata"
+                          disablePictureInPicture
+                          disableRemotePlayback
+                          controlsList="nodownload noplaybackrate noremoteplayback"
                           aria-hidden
                         />
                       </div>
@@ -205,6 +232,9 @@ export function Spotlight() {
                         autoPlay
                         playsInline
                         preload="metadata"
+                        disablePictureInPicture
+                        disableRemotePlayback
+                        controlsList="nodownload noplaybackrate noremoteplayback"
                         aria-hidden
                       />
                     </a>
