@@ -21,7 +21,11 @@ export function Projects() {
     const video = videoRefs.current[projectName];
     if (!video) return;
     video.currentTime = 0;
-    void video.play();
+    void video.play().catch((error: unknown) => {
+      // Hover in/out can interrupt playback; suppress expected AbortError noise.
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      console.error(error);
+    });
   };
 
   const handleMouseLeave = (projectName: string) => {
@@ -38,38 +42,13 @@ export function Projects() {
       className="projects-section scroll-mt-20"
     >
       <h2 id="projects-heading" className="sr-only">
-        Featured work
+        Projects
       </h2>
       <div className="container">
         <div className="projects-section__header">
           <div className="projects-section__title">
-            <h1 className="featured-title">Featured Work</h1>
+            <h1 className="featured-title">Projects</h1>
           </div>
-
-          <div className="projects-section__arrow" aria-hidden>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              viewBox="0 0 32 32"
-              fill="none"
-            >
-              <path
-                d="M16 26.6665L16 5.33317"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M22.6667 19.9999L16 26.6665L9.33337 19.9998"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
         </div>
 
         <div className="projects-grid">

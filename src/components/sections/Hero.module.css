@@ -10,6 +10,55 @@
   overflow-x: hidden;
 }
 
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--bg);
+  pointer-events: none;
+}
+
+.heroGlow {
+  position: absolute;
+  left: -15%;
+  top: -20%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 220, 234, 0.16) 0%, rgba(12, 15, 20, 0) 70%);
+  filter: blur(8px);
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(217, 221, 230, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 221, 230, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 1), transparent 75%);
+}
+
+.heroNoise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  opacity: 0.2;
+}
+
+.heroLayer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .heroHeaderWrapper {
   /* wrapper for two lines; original had no class — keeps layout clear */
 }
@@ -41,6 +90,7 @@
   bottom: 0;
   padding: 2em;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -52,6 +102,23 @@
 
 .heroFooterSymbols {
   height: 1rem;
+  margin-left: 1.25rem;
+  opacity: 0.65;
+}
+
+.heroStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+}
+
+.heroStatusDot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: rgba(176, 255, 198, 0.9);
+  box-shadow: 0 0 12px rgba(176, 255, 198, 0.6);
 }
 
 .heroFooterTags {
@@ -95,11 +162,20 @@
   }
 
   .heroFooter {
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
-  .heroFooterScrollDown {
-    left: 2em;
-    transform: translateX(0%);
+  .heroStatus {
+    margin-right: 1rem;
+  }
+
+  .heroStatus p {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroStatus {
+    display: none;
   }
 }

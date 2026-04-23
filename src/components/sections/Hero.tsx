@@ -8,10 +8,12 @@ import styles from "./Hero.module.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const heroCycleImages = [
-  "/images/work-items/work-item-1.png",
   "/images/work-items/work-item-2.png",
   "/images/work-items/work-item-3.png",
   "/images/work-items/work-item-4.png",
+  "/images/work-items/work-item-5.png",
+  "/images/work-items/work-item-6.png",
+  "/images/work-items/work-item-7.png",
 ];
 
 export function Hero() {
@@ -71,21 +73,32 @@ export function Hero() {
   return (
     <div id="hero" className="scroll-mt-20">
       <section className={styles.hero}>
-        <div className={styles.heroHeaderWrapper}>
-          <div className={`${styles.heroHeader} ${styles.heroHeader1}`}>
-            <h1>Abhilekh</h1>
-          </div>
-          <div className={`${styles.heroHeader} ${styles.heroHeader2}`}>
-            <h1>Bhardwaj</h1>
-          </div>
+        <div className={styles.heroBackground} aria-hidden>
+          <div className={styles.heroGlow} />
+          <div className={styles.heroGrid} />
+          <div className={styles.heroNoise} />
         </div>
-        <div className={styles.heroFooter}>
-          <div className={styles.heroFooterSymbols}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/global/symbols.png" alt="" />
+        <div className={styles.heroLayer}>
+          <div className={styles.heroHeaderWrapper}>
+            <div className={`${styles.heroHeader} ${styles.heroHeader1}`}>
+              <h1>Abhilekh</h1>
+            </div>
+            <div className={`${styles.heroHeader} ${styles.heroHeader2}`}>
+              <h1>Bhardwaj</h1>
+            </div>
           </div>
-          <div className={styles.heroFooterTags}>
-            <p className={styles.mn}>Building Mode: ON</p>
+          <div className={styles.heroFooter}>
+            <div className={styles.heroStatus}>
+              <span className={styles.heroStatusDot} />
+              <p className={styles.mn}>Currently crafting smooth UI</p>
+            </div>
+            <div className={styles.heroFooterSymbols}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/global/symbols.png" alt="" />
+            </div>
+            <div className={styles.heroFooterTags}>
+              <p className={styles.mn}>Building Mode: ON</p>
+            </div>
           </div>
         </div>
       </section>

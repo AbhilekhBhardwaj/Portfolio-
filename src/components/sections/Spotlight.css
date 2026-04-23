@@ -51,6 +51,12 @@
   overflow: hidden;
 }
 
+.spotlight .marquee-link-item {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .spotlight .marquee-img-item.marquee-text-item {
   flex: 1;
 }
@@ -65,6 +71,12 @@
 }
 
 .spotlight .marquee-img-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spotlight .marquee-img-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
