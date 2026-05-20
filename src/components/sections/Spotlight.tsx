@@ -1,7 +1,9 @@
 "use client";
 
 import "./Spotlight.css";
-import { useRef } from "react";
+import { LazyVideo } from "@/components/LazyVideo";
+import { initScrollPlaybackGate } from "@/lib/scrollPlaybackGate";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -142,74 +144,76 @@ export function Spotlight() {
   const spotlightRef = useRef<HTMLElement | null>(null);
   const rowsSpotlightItems = getRowsSpotlightItems(marqueeRows.length, 4);
 
+  useEffect(() => initScrollPlaybackGate(), []);
+
   useGSAP(
     () => {
       const scrollTriggerInstances: ScrollTrigger[] = [];
 
+      ScrollTrigger.config({ limitCallbacks: true });
+
       const initSpotlight = () => {
-        new SplitType(".marquee-text-item h1", { types: "chars" });
+        const section = spotlightRef.current;
+        if (!section) return;
 
-        document.querySelectorAll(".marquee-container").forEach((container, index) => {
+        section.querySelectorAll<HTMLElement>(".marquee-text-item h1").forEach((heading) => {
+          new SplitType(heading, { types: "words" });
+        });
+
+        section.querySelectorAll(".marquee-container").forEach((container, index) => {
           const marquee = container.querySelector(".marquee");
-          const chars = container.querySelectorAll(".char");
+          const words = container.querySelectorAll(".word");
+          if (!marquee) return;
 
-          const marqueeTrigger = gsap.to(marquee, {
-            x: index % 2 === 0 ? "5%" : "-15%",
+          const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: container,
               start: "top bottom",
               end: "150% top",
-              scrub: true,
+              scrub: 0.4,
+              fastScrollEnd: true,
             },
-            force3D: true,
           });
 
-          const charsTrigger = gsap.fromTo(
-            chars,
-            { fontWeight: 100 },
+          timeline.to(
+            marquee,
             {
-              fontWeight: 900,
-              duration: 1,
+              x: index % 2 === 0 ? "5%" : "-15%",
               ease: "none",
-              stagger: {
-                each: 0.35,
-                from: index % 2 === 0 ? "end" : "start",
-                ease: "linear",
-              },
-              scrollTrigger: {
-                trigger: container,
-                start: "50% bottom",
-                end: "top top",
-                scrub: true,
-              },
-            }
+              force3D: true,
+            },
+            0
           );
 
-          if (marqueeTrigger.scrollTrigger) {
-            scrollTriggerInstances.push(marqueeTrigger.scrollTrigger);
+          if (words.length > 0) {
+            timeline.fromTo(
+              words,
+              { opacity: 0.2, yPercent: 30 },
+              {
+                opacity: 1,
+                yPercent: 0,
+                ease: "none",
+                stagger: {
+                  each: 0.35,
+                  from: index % 2 === 0 ? "end" : "start",
+                },
+                force3D: true,
+              },
+              0
+            );
           }
-          if (charsTrigger.scrollTrigger) {
-            scrollTriggerInstances.push(charsTrigger.scrollTrigger);
+
+          if (timeline.scrollTrigger) {
+            scrollTriggerInstances.push(timeline.scrollTrigger);
           }
         });
 
         ScrollTrigger.refresh();
       };
 
-      const waitForOtherTriggers = () => {
-        const existingTriggers = ScrollTrigger.getAll();
-        const hasPinnedTrigger = existingTriggers.some(
-          (trigger) => trigger.vars && trigger.vars.pin
-        );
-
-        if (hasPinnedTrigger || existingTriggers.length > 0) {
-          setTimeout(initSpotlight, 300);
-        } else {
-          initSpotlight();
-        }
-      };
-
-      setTimeout(waitForOtherTriggers, 100);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(initSpotlight);
+      });
 
       return () => {
         scrollTriggerInstances.forEach((trigger) => trigger.kill());
@@ -247,13 +251,14 @@ export function Spotlight() {
                         key={`${row.id}-img-${slotIndex}-${item.video}`}
                         aria-label={item.alt}
                       >
-                        <video
+                        <LazyVideo
                           src={item.video}
+                          rootMargin="0px"
+                          pauseOnScroll
+                          exclusivePlayback
                           muted
                           loop
-                          autoPlay
                           playsInline
-                          preload="metadata"
                           disablePictureInPicture
                           disableRemotePlayback
                           controlsList="nodownload noplaybackrate noremoteplayback"
@@ -272,13 +277,14 @@ export function Spotlight() {
                       rel="noreferrer"
                       aria-label={item.alt}
                     >
-                      <video
+                      <LazyVideo
                         src={item.video}
+                        rootMargin="0px"
+                        pauseOnScroll
+                        exclusivePlayback
                         muted
                         loop
-                        autoPlay
                         playsInline
-                        preload="metadata"
                         disablePictureInPicture
                         disableRemotePlayback
                         controlsList="nodownload noplaybackrate noremoteplayback"

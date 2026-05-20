@@ -1,4 +1,5 @@
-import { Footer, Hero, Projects, Spotlight } from "@/components/sections";
+import { Footer, Hero, Projects } from "@/components/sections";
+import { Spotlight } from "@/components/sections/SpotlightLazy";
 import { Navbar } from "@/components/Navbar";
 
 export default function Home() {

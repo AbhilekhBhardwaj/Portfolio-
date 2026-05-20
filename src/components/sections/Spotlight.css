@@ -7,6 +7,16 @@
   overflow: hidden;
 }
 
+.spotlight--placeholder .marquees {
+  height: 150svh;
+}
+
+@media (max-width: 1000px) {
+  .spotlight--placeholder .marquees {
+    height: 100svh;
+  }
+}
+
 .spotlight .marquees {
   position: relative;
   width: 100%;
@@ -23,6 +33,8 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 250px;
 }
 
 .spotlight .marquee {
@@ -35,6 +47,7 @@
   display: flex;
   gap: 1em;
   will-change: transform;
+  contain: layout style;
 }
 
 .spotlight #marquee-1 .marquee,
@@ -70,6 +83,14 @@
   letter-spacing: -0.125rem;
 }
 
+.spotlight .marquee-img-item h1 .word {
+  display: inline-block;
+}
+
+.spotlight .marquee-img-item h1 .char {
+  display: inline-block;
+}
+
 .spotlight .marquee-img-item img {
   width: 100%;
   height: 100%;
@@ -80,10 +101,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.spotlight .marquee-img-item h1 .char {
-  will-change: font-weight;
+  contain: strict;
+  pointer-events: none;
 }
 
 @media (max-width: 1000px) {

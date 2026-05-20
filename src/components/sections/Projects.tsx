@@ -17,11 +17,32 @@ export function Projects() {
   const rows = chunkPairs(projects);
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
-  const handleMouseEnter = (projectName: string) => {
+  const ensureProjectVideoLoaded = (video: HTMLVideoElement, src: string) => {
+    if (video.dataset.loaded === "true") {
+      return Promise.resolve();
+    }
+
+    video.src = src;
+    video.load();
+    video.dataset.loaded = "true";
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      return Promise.resolve();
+    }
+
+    return new Promise<void>((resolve) => {
+      video.addEventListener("loadeddata", () => resolve(), { once: true });
+    });
+  };
+
+  const handleMouseEnter = (projectName: string, videoSrc: string) => {
     const video = videoRefs.current[projectName];
     if (!video) return;
-    video.currentTime = 0;
-    void video.play().catch((error: unknown) => {
+
+    void ensureProjectVideoLoaded(video, videoSrc).then(() => {
+      video.currentTime = 0;
+      return video.play();
+    }).catch((error: unknown) => {
       // Hover in/out can interrupt playback; suppress expected AbortError noise.
       if (error instanceof DOMException && error.name === "AbortError") return;
       console.error(error);
@@ -59,7 +80,7 @@ export function Projects() {
                   <Link
                     href={project.href}
                     className="project-card__link"
-                    onMouseEnter={() => handleMouseEnter(project.name)}
+                    onMouseEnter={() => handleMouseEnter(project.name, project.video)}
                     onMouseLeave={() => handleMouseLeave(project.name)}
                   >
                     <div className="project-card__media">
@@ -71,11 +92,10 @@ export function Projects() {
                           videoRefs.current[project.name] = el;
                         }}
                         className="project-card__video"
-                        src={project.video}
                         muted
                         loop
                         playsInline
-                        preload="metadata"
+                        preload="none"
                         aria-hidden
                       />
                       {/* eslint-disable-next-line @next/next/no-img-element */}
